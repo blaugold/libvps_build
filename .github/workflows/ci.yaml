@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          brew install meson
+          git clone https://github.com/libvips/libvips.git
+          cd libvips
+          meson setup build-dir
+          cd build-dir
+          ninja
